@@ -1,0 +1,12 @@
+{
+  // Portable MCP server registration template.
+  "servers": {
+    "example-server": {
+      "transport": "http",
+      "url": "https://example.com/mcp",
+      "headers": {
+        "Authorization": "Bearer ${EXAMPLE_TOKEN}"
+      }
+    }
+  }
+}

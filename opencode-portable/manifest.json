@@ -1,0 +1,575 @@
+{
+  "version": 1,
+  "package": "opencode-portable",
+  "assets": [
+    {
+      "id": "prompt.system-engineering-rules",
+      "type": "prompt",
+      "status": "stable",
+      "title": "System Engineering Rules",
+      "path": "prompts/stable/system-engineering-rules.md",
+      "source_paths": [
+        "restored-src/src/constants/prompts.ts"
+      ],
+      "required_capabilities": [
+        "file_read",
+        "file_edit",
+        "shell"
+      ],
+      "notes": "推荐作为基础 system/developer prompt。"
+    },
+    {
+      "id": "prompt.verification-agent",
+      "type": "prompt",
+      "status": "stable",
+      "title": "Verification Agent",
+      "path": "prompts/stable/verification-agent.md",
+      "source_paths": [
+        "restored-src/src/tools/AgentTool/built-in/verificationAgent.ts",
+        "restored-src/src/skills/bundled/verify.ts"
+      ],
+      "required_capabilities": [
+        "shell",
+        "test_runner",
+        "optional_browser"
+      ],
+      "notes": "适合独立 verifier agent。"
+    },
+    {
+      "id": "prompt.mcp-tool-discovery",
+      "type": "prompt",
+      "status": "stable",
+      "title": "MCP Tool Discovery",
+      "path": "prompts/stable/mcp-tool-discovery.md",
+      "source_paths": [
+        "restored-src/src/tools/ToolSearchTool/prompt.ts",
+        "restored-src/src/tools/ListMcpResourcesTool/prompt.ts",
+        "restored-src/src/tools/ReadMcpResourceTool/prompt.ts"
+      ],
+      "required_capabilities": [
+        "tool_search",
+        "mcp"
+      ],
+      "notes": "按需加载 MCP schema。"
+    },
+    {
+      "id": "prompt.task-list-discipline",
+      "type": "prompt",
+      "status": "stable",
+      "title": "Task List Discipline",
+      "path": "prompts/stable/task-list-discipline.md",
+      "source_paths": [
+        "restored-src/src/tools/TaskCreateTool/prompt.ts"
+      ],
+      "required_capabilities": [
+        "task_tracking"
+      ],
+      "notes": "多步骤任务的任务列表纪律。"
+    },
+    {
+      "id": "prompt.browser-automation",
+      "type": "prompt",
+      "status": "advanced",
+      "title": "Browser Automation",
+      "path": "prompts/advanced/browser-automation.md",
+      "source_paths": [
+        "restored-src/src/utils/claudeInChrome/prompt.ts",
+        "restored-src/src/skills/bundled/claudeInChrome.ts"
+      ],
+      "required_capabilities": [
+        "browser_mcp",
+        "console_log_access"
+      ],
+      "notes": "真实浏览器自动化规范。"
+    },
+    {
+      "id": "prompt.memory-extraction",
+      "type": "prompt",
+      "status": "advanced",
+      "title": "Memory Extraction",
+      "path": "prompts/advanced/memory-extraction.md",
+      "source_paths": [
+        "restored-src/src/services/extractMemories/prompts.ts",
+        "restored-src/src/services/SessionMemory/prompts.ts"
+      ],
+      "required_capabilities": [
+        "persistent_memory",
+        "file_edit"
+      ],
+      "notes": "适合有持久化记忆系统的平台。"
+    },
+    {
+      "id": "prompt.session-compaction",
+      "type": "prompt",
+      "status": "advanced",
+      "title": "Session Compaction",
+      "path": "prompts/advanced/session-compaction.md",
+      "source_paths": [
+        "restored-src/src/services/compact/prompt.ts"
+      ],
+      "required_capabilities": [
+        "summarization"
+      ],
+      "notes": "对话压缩和交接摘要。"
+    },
+    {
+      "id": "prompt.subagent-delegation",
+      "type": "prompt",
+      "status": "advanced",
+      "title": "Subagent Delegation",
+      "path": "prompts/advanced/subagent-delegation.md",
+      "source_paths": [
+        "restored-src/src/tools/AgentTool/prompt.ts",
+        "restored-src/src/skills/bundled/batch.ts"
+      ],
+      "required_capabilities": [
+        "subagents",
+        "parallel_execution"
+      ],
+      "notes": "子代理委派规范。"
+    },
+    {
+      "id": "prompt.magic-doc-updater",
+      "type": "prompt",
+      "status": "advanced",
+      "title": "Magic Doc Updater",
+      "path": "prompts/advanced/magic-doc-updater.md",
+      "source_paths": [
+        "restored-src/src/services/MagicDocs/prompts.ts"
+      ],
+      "required_capabilities": [
+        "file_edit"
+      ],
+      "notes": "用于长期工程文档的原位更新。"
+    },
+    {
+      "id": "skill.update-config",
+      "type": "skill",
+      "status": "stable",
+      "title": "update-config",
+      "path": "skills/stable/update-config/SKILL.md",
+      "source_paths": [
+        "restored-src/src/skills/bundled/updateConfig.ts"
+      ],
+      "required_capabilities": [
+        "file_read",
+        "file_edit",
+        "json_edit"
+      ],
+      "notes": "把自动化诉求转成真实配置。"
+    },
+    {
+      "id": "skill.keybindings-help",
+      "type": "skill",
+      "status": "stable",
+      "title": "keybindings-help",
+      "path": "skills/stable/keybindings-help/SKILL.md",
+      "source_paths": [
+        "restored-src/src/skills/bundled/keybindings.ts"
+      ],
+      "required_capabilities": [
+        "file_read",
+        "file_edit"
+      ],
+      "notes": "键位自定义与冲突排查。"
+    },
+    {
+      "id": "skill.verify",
+      "type": "skill",
+      "status": "stable",
+      "title": "verify",
+      "path": "skills/stable/verify/SKILL.md",
+      "source_paths": [
+        "restored-src/src/skills/bundled/verify.ts",
+        "restored-src/src/tools/AgentTool/built-in/verificationAgent.ts"
+      ],
+      "required_capabilities": [
+        "subprocess",
+        "test_runner",
+        "optional_browser"
+      ],
+      "notes": "强验证流程。"
+    },
+    {
+      "id": "skill.simplify",
+      "type": "skill",
+      "status": "stable",
+      "title": "simplify",
+      "path": "skills/stable/simplify/SKILL.md",
+      "source_paths": [
+        "restored-src/src/skills/bundled/simplify.ts"
+      ],
+      "required_capabilities": [
+        "file_read",
+        "file_edit",
+        "optional_subagents"
+      ],
+      "notes": "针对 diff 的复用/质量/效率复查。"
+    },
+    {
+      "id": "skill.remember",
+      "type": "skill",
+      "status": "advanced",
+      "title": "remember",
+      "path": "skills/advanced/remember/SKILL.md",
+      "source_paths": [
+        "restored-src/src/skills/bundled/remember.ts"
+      ],
+      "required_capabilities": [
+        "persistent_memory",
+        "layered_instructions"
+      ],
+      "notes": "记忆分层整理。"
+    },
+    {
+      "id": "skill.batch",
+      "type": "skill",
+      "status": "advanced",
+      "title": "batch",
+      "path": "skills/advanced/batch/SKILL.md",
+      "source_paths": [
+        "restored-src/src/skills/bundled/batch.ts"
+      ],
+      "required_capabilities": [
+        "subagents",
+        "parallel_execution",
+        "isolated_workspaces"
+      ],
+      "notes": "大规模批处理迁移编排。"
+    },
+    {
+      "id": "skill.claude-in-chrome",
+      "type": "skill",
+      "status": "advanced",
+      "title": "claude-in-chrome",
+      "path": "skills/advanced/claude-in-chrome/SKILL.md",
+      "source_paths": [
+        "restored-src/src/skills/bundled/claudeInChrome.ts",
+        "restored-src/src/utils/claudeInChrome/prompt.ts"
+      ],
+      "required_capabilities": [
+        "browser_mcp",
+        "screenshots",
+        "console_logs"
+      ],
+      "notes": "登录态真实浏览器自动化。"
+    },
+    {
+      "id": "skill.loop",
+      "type": "skill",
+      "status": "advanced",
+      "title": "loop",
+      "path": "skills/advanced/loop/SKILL.md",
+      "source_paths": [
+        "restored-src/src/skills/bundled/loop.ts"
+      ],
+      "required_capabilities": [
+        "scheduler",
+        "recurring_tasks"
+      ],
+      "notes": "周期性 prompt 调度。"
+    },
+    {
+      "id": "skill.schedule-remote-agents",
+      "type": "skill",
+      "status": "advanced",
+      "title": "schedule-remote-agents",
+      "path": "skills/advanced/schedule-remote-agents/SKILL.md",
+      "source_paths": [
+        "restored-src/src/skills/bundled/scheduleRemoteAgents.ts",
+        "restored-src/src/tools/RemoteTriggerTool/prompt.ts"
+      ],
+      "required_capabilities": [
+        "remote_triggers",
+        "cloud_agents",
+        "optional_mcp_connectors"
+      ],
+      "notes": "远程云代理调度。"
+    },
+    {
+      "id": "skill.claude-api",
+      "type": "skill",
+      "status": "advanced",
+      "title": "claude-api",
+      "path": "skills/advanced/claude-api/SKILL.md",
+      "source_paths": [
+        "restored-src/src/skills/bundled/claudeApi.ts"
+      ],
+      "required_capabilities": [
+        "documentation_lookup",
+        "optional_web_fetch"
+      ],
+      "notes": "Claude API 文档与模式路由器。"
+    },
+    {
+      "id": "skill.debug",
+      "type": "skill",
+      "status": "experimental",
+      "title": "debug",
+      "path": "skills/experimental/debug/SKILL.md",
+      "source_paths": [
+        "restored-src/src/skills/bundled/debug.ts"
+      ],
+      "required_capabilities": [
+        "session_debug_logs"
+      ],
+      "notes": "平台自诊断，强绑定会话日志。"
+    },
+    {
+      "id": "skill.skillify",
+      "type": "skill",
+      "status": "experimental",
+      "title": "skillify",
+      "path": "skills/experimental/skillify/SKILL.md",
+      "source_paths": [
+        "restored-src/src/skills/bundled/skillify.ts"
+      ],
+      "required_capabilities": [
+        "conversation_memory",
+        "interactive_questions"
+      ],
+      "notes": "从当前会话反向生成 skill。"
+    },
+    {
+      "id": "skill.stuck",
+      "type": "skill",
+      "status": "experimental",
+      "title": "stuck",
+      "path": "skills/experimental/stuck/SKILL.md",
+      "source_paths": [
+        "restored-src/src/skills/bundled/stuck.ts"
+      ],
+      "required_capabilities": [
+        "local_process_inspection"
+      ],
+      "notes": "诊断卡死会话。"
+    },
+    {
+      "id": "skill.lorem-ipsum",
+      "type": "skill",
+      "status": "experimental",
+      "title": "lorem-ipsum",
+      "path": "skills/experimental/lorem-ipsum/SKILL.md",
+      "source_paths": [
+        "restored-src/src/skills/bundled/loremIpsum.ts"
+      ],
+      "required_capabilities": [
+        "none"
+      ],
+      "notes": "长上下文占位文本生成。"
+    },
+    {
+      "id": "mcp.core-capabilities",
+      "type": "mcp-doc",
+      "status": "stable",
+      "title": "MCP Core Capabilities",
+      "path": "mcp/tool-specs/core-capabilities.md",
+      "source_paths": [
+        "restored-src/src/services/mcp/client.ts",
+        "restored-src/src/services/mcp/utils.ts"
+      ],
+      "required_capabilities": [
+        "mcp"
+      ],
+      "notes": "MCP 四分法总览。"
+    },
+    {
+      "id": "mcp.naming-and-permissions",
+      "type": "mcp-doc",
+      "status": "stable",
+      "title": "MCP Naming and Permissions",
+      "path": "mcp/tool-specs/naming-and-permissions.md",
+      "source_paths": [
+        "restored-src/src/services/mcp/utils.ts",
+        "restored-src/src/services/mcp/client.ts"
+      ],
+      "required_capabilities": [
+        "mcp",
+        "permissions"
+      ],
+      "notes": "命名与权限粒度。"
+    },
+    {
+      "id": "mcp.deferred-tool-search",
+      "type": "mcp-doc",
+      "status": "stable",
+      "title": "Deferred Tool Search",
+      "path": "mcp/tool-specs/deferred-tool-search.md",
+      "source_paths": [
+        "restored-src/src/tools/ToolSearchTool/prompt.ts",
+        "restored-src/src/tools/ToolSearchTool/ToolSearchTool.ts"
+      ],
+      "required_capabilities": [
+        "tool_search",
+        "mcp"
+      ],
+      "notes": "延迟加载 schema。"
+    },
+    {
+      "id": "mcp.resources",
+      "type": "mcp-doc",
+      "status": "stable",
+      "title": "Resource MCP",
+      "path": "mcp/tool-specs/resources.md",
+      "source_paths": [
+        "restored-src/src/tools/ListMcpResourcesTool/ListMcpResourcesTool.ts",
+        "restored-src/src/tools/ReadMcpResourceTool/ReadMcpResourceTool.ts"
+      ],
+      "required_capabilities": [
+        "mcp",
+        "resource_read"
+      ],
+      "notes": "资源优先读取链路。"
+    },
+    {
+      "id": "mcp.browser-mcp",
+      "type": "mcp-doc",
+      "status": "advanced",
+      "title": "Browser MCP",
+      "path": "mcp/tool-specs/browser-mcp.md",
+      "source_paths": [
+        "restored-src/src/utils/claudeInChrome/prompt.ts",
+        "restored-src/src/skills/bundled/claudeInChrome.ts"
+      ],
+      "required_capabilities": [
+        "browser_mcp"
+      ],
+      "notes": "浏览器型 MCP 的特殊运行规则。"
+    },
+    {
+      "id": "mcp.workflow.knowledge-base",
+      "type": "mcp-doc",
+      "status": "stable",
+      "title": "Knowledge Base Workflow",
+      "path": "mcp/workflows/knowledge-base.md",
+      "source_paths": [
+        "restored-src/src/tools/ListMcpResourcesTool/ListMcpResourcesTool.ts",
+        "restored-src/src/tools/ReadMcpResourceTool/ReadMcpResourceTool.ts"
+      ],
+      "required_capabilities": [
+        "mcp",
+        "resource_read"
+      ],
+      "notes": "文档型 server 工作流。"
+    },
+    {
+      "id": "mcp.workflow.developer-tools",
+      "type": "mcp-doc",
+      "status": "stable",
+      "title": "Developer Tools Workflow",
+      "path": "mcp/workflows/developer-tools.md",
+      "source_paths": [
+        "restored-src/src/tools/ToolSearchTool/ToolSearchTool.ts",
+        "restored-src/src/services/mcp/client.ts"
+      ],
+      "required_capabilities": [
+        "mcp",
+        "tool_search"
+      ],
+      "notes": "开发工具型 server 工作流。"
+    },
+    {
+      "id": "mcp.workflow.browser-automation",
+      "type": "mcp-doc",
+      "status": "advanced",
+      "title": "Browser Automation Workflow",
+      "path": "mcp/workflows/browser-automation.md",
+      "source_paths": [
+        "restored-src/src/utils/claudeInChrome/prompt.ts"
+      ],
+      "required_capabilities": [
+        "browser_mcp"
+      ],
+      "notes": "浏览器型 server 工作流。"
+    },
+    {
+      "id": "mcp.prompt.resource-first",
+      "type": "mcp-doc",
+      "status": "stable",
+      "title": "Resource First Prompt",
+      "path": "mcp/prompts/resource-first.md",
+      "source_paths": [
+        "restored-src/src/tools/ListMcpResourcesTool/ListMcpResourcesTool.ts",
+        "restored-src/src/tools/ReadMcpResourceTool/ReadMcpResourceTool.ts"
+      ],
+      "required_capabilities": [
+        "mcp",
+        "resource_read"
+      ],
+      "notes": "资源优先 prompt。"
+    },
+    {
+      "id": "mcp.prompt.tool-discovery",
+      "type": "mcp-doc",
+      "status": "stable",
+      "title": "Tool Discovery Prompt",
+      "path": "mcp/prompts/tool-discovery.md",
+      "source_paths": [
+        "restored-src/src/tools/ToolSearchTool/prompt.ts",
+        "restored-src/src/tools/ToolSearchTool/ToolSearchTool.ts"
+      ],
+      "required_capabilities": [
+        "tool_search",
+        "mcp"
+      ],
+      "notes": "按需 schema 发现 prompt。"
+    },
+    {
+      "id": "mcp.prompt.browser-runbook",
+      "type": "mcp-doc",
+      "status": "advanced",
+      "title": "Browser Runbook Prompt",
+      "path": "mcp/prompts/browser-runbook.md",
+      "source_paths": [
+        "restored-src/src/utils/claudeInChrome/prompt.ts"
+      ],
+      "required_capabilities": [
+        "browser_mcp"
+      ],
+      "notes": "浏览器型 MCP 执行提示。"
+    },
+    {
+      "id": "template.mcp-server",
+      "type": "template",
+      "status": "stable",
+      "title": "MCP Server Template",
+      "path": "mcp/config-templates/server-template.jsonc",
+      "source_paths": [
+        "restored-src/src/services/mcp/client.ts"
+      ],
+      "required_capabilities": [
+        "mcp"
+      ],
+      "notes": "server 注册模板。"
+    },
+    {
+      "id": "template.mcp-permissions",
+      "type": "template",
+      "status": "stable",
+      "title": "MCP Permissions Template",
+      "path": "mcp/config-templates/permissions-template.jsonc",
+      "source_paths": [
+        "restored-src/src/services/mcp/utils.ts"
+      ],
+      "required_capabilities": [
+        "permissions"
+      ],
+      "notes": "权限粒度模板。"
+    },
+    {
+      "id": "template.browser-server",
+      "type": "template",
+      "status": "advanced",
+      "title": "Browser Server Template",
+      "path": "mcp/config-templates/browser-server-template.md",
+      "source_paths": [
+        "restored-src/src/utils/claudeInChrome/prompt.ts",
+        "restored-src/src/skills/bundled/claudeInChrome.ts"
+      ],
+      "required_capabilities": [
+        "browser_mcp"
+      ],
+      "notes": "浏览器型 server 建模提示。"
+    }
+  ]
+}

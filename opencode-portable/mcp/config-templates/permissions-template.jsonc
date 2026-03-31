@@ -1,0 +1,8 @@
+{
+  // Portable permission model example.
+  "permissions": {
+    "mcp__example-server": "ask",
+    "mcp__example-server__read_ticket": "allow",
+    "mcp__example-server__delete_ticket": "deny"
+  }
+}
